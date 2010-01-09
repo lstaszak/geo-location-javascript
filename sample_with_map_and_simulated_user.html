@@ -47,7 +47,7 @@ function show_position(p)
 	last_position=p;
 	document.getElementById('current').innerHTML="latitude="+p.coords.latitude.toFixed(2)+" longitude="+p.coords.longitude.toFixed(2);
 	var pos=new google.maps.LatLng(p.coords.latitude,p.coords.longitude);
-	map.set_center(pos);
+	map.setCenter(pos);
 
 	var infowindow = new google.maps.InfoWindow({
 	    content: "<strong>yes</strong>"
