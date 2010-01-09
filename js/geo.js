@@ -58,24 +58,7 @@ var geo_position_js=function()
 		provider.getCurrentPosition(successCallback, errorCallback,options);			
 	}
 
-	pub.watchPosition = function(successCallback,errorCallback,options){
-		
-		try
-		{
-			provider.watchPosition(successCallback,errorCallback,options);
-			
-			pub.clearWatch = function(watchId){
-				if(typeof(provider.clearWatch) != "undefined") // Should always be true, but just in case
-					provider.clearWatch(watchId);
-			}
-		}
-		catch(e)
-		{
-			//thrown when method not available
-			errorCallback({message:e,code:1});
-		}
 
-	}
 
 	pub.init = function()
 	{		
@@ -144,6 +127,24 @@ var geo_position_js=function()
 					}
 					provider.getCurrentPosition(_successCallback, errorCallback, options);
 				}
+				pub.watchPosition = function(successCallback,errorCallback,options){
+
+					try
+					{
+						provider.watchPosition(successCallback,errorCallback,options);
+
+						pub.clearWatch = function(watchId){
+							if(typeof(provider.clearWatch) != "undefined") // Should always be true, but just in case
+								provider.clearWatch(watchId);
+						}
+					}
+					catch(e)
+					{
+						//thrown when method not available
+						errorCallback({message:e,code:1});
+					}
+
+				}				
 			}			
 			else if (typeof(Mojo) != "undefined" && typeof(Mojo.Service) != "undefined" && typeof(Mojo.Service.Request) != "Mojo.Service.Request") {
 				provider = true;
