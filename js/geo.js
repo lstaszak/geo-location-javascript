@@ -72,7 +72,7 @@ var geo_position_js=function()
 				provider = bondi.geolocation;
 			}
 
-			else if (typeof(window.google) != "undefined") 
+			else if (typeof(window.google) != "undefined" && typeof(window.google.gears) != "undefined") 
 			{
 				provider = google.gears.factory.create('beta.geolocation');	
 				pub.getCurrentPosition = function(successCallback, errorCallback, options){			
