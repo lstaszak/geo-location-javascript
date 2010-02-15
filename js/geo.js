@@ -1,5 +1,5 @@
 /*!
- * geo-location-javascript v0.4.1 
+ * geo-location-javascript v0.4.2 
  * http://code.google.com/p/geo-location-javascript/
  *
  * Copyright (c) 2009 Stan Wiechers
@@ -265,7 +265,7 @@ var geo_position_js=function()
 						//or use the method to register a callback function.
 						if(parseFloat(navigator.appVersion)>=4.6)
 						{
-							blackberry.location.onLocationUpdate(handleBlackBerryLocation());
+							blackberry.location.onLocationUpdate(handleBlackBerryLocation);
 						}
 						else
 						{
