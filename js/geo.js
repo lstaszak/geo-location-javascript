@@ -1,5 +1,5 @@
 /*!
- * geo-location-javascript v0.4.2 
+ * geo-location-javascript v0.4.3
  * http://code.google.com/p/geo-location-javascript/
  *
  * Copyright (c) 2009 Stan Wiechers
@@ -38,7 +38,7 @@ function handleBlackBerryLocation()
 		//http://docs.blackberry.com/en/developers/deliverables/11849/blackberry_location_onLocationUpdate_568407_11.jsp
 		if(parseFloat(navigator.appVersion)>=4.6)
 		{
-			blackberry.location.removeLocationUpdate();
+			blackberry.location.removeLocationUpdate(handleBlackBerryLocation);
 		}
 		
 		bb_successCallback = null;
@@ -245,6 +245,7 @@ var geo_position_js=function()
 					}
 				}
 				else if (typeof(window.blackberry) != "undefined" && blackberry.location.GPSSupported) {
+					
 					
 					// set to autonomous mode
 					blackberry.location.setAidMode(2);
