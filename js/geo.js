@@ -56,6 +56,8 @@ var geo_position_js=function() {
 
         var pub = {};
         var provider=null;
+		var u="undefined";
+
 
         pub.getCurrentPosition = function(success,error,opts)
         {
@@ -67,15 +69,15 @@ var geo_position_js=function() {
         {			
                 try
                 {
-                        if (typeof(geo_position_js_simulator)!="undefined")
+                        if (typeof(geo_position_js_simulator)!=u)
                         {
                                 provider=geo_position_js_simulator;
                         }
-                        else if (typeof(bondi)!="undefined" && typeof(bondi.geolocation)!="undefined")
+                        else if (typeof(bondi)!=u && typeof(bondi.geolocation)!=u)
                         {
                                 provider=bondi.geolocation;
                         }
-                        else if (typeof(navigator.geolocation)!="undefined")
+                        else if (typeof(navigator.geolocation)!=u)
                         {
                                 provider=navigator.geolocation;
                                 pub.getCurrentPosition = function(success, error, opts)
@@ -83,7 +85,7 @@ var geo_position_js=function() {
                                         function _success(p)
                                         {
                                                 //for mozilla geode,it returns the coordinates slightly differently
-                                                if(typeof(p.latitude)!="undefined")
+                                                if(typeof(p.latitude)!=u)
                                                 {
                                                         success({timestamp:p.timestamp, coords: {latitude:p.latitude,longitude:p.longitude}});
                                                 }
@@ -95,11 +97,11 @@ var geo_position_js=function() {
                                         provider.getCurrentPosition(_success,error,opts);
                                 }
                         }
-                        else if(typeof(window.blackberry)!="undefined" && blackberry.location.GPSSupported)
+                        else if(typeof(window.blackberry)!=u && blackberry.location.GPSSupported)
                         {
 
                                 // set to autonomous mode
-								if(typeof(blackberry.location.setAidMode)=="undefined")
+								if(typeof(blackberry.location.setAidMode)==u)
 								{
 	                                return false;									
 								}
@@ -129,11 +131,11 @@ var geo_position_js=function() {
                                 }
                                 provider=blackberry.location;				
                         }
-                        else if(typeof(window.google)!="undefined" && typeof(google.gears)!="undefined")
+                        else if(typeof(window.google)!=u && typeof(google.gears)!=u)
                         {
                                 provider=google.gears.factory.create('beta.geolocation');
                         }
-                        else if ( typeof(Mojo) !="undefined" && typeof(Mojo.Service.Request)!="Mojo.Service.Request")
+                        else if ( typeof(Mojo) !=u && typeof(Mojo.Service.Request)!="Mojo.Service.Request")
                         {
                                 provider=true;
                                 pub.getCurrentPosition = function(success, error, opts)
@@ -180,7 +182,7 @@ var geo_position_js=function() {
                                                                 }
                                                                 else if (e.errorCode==2)
                                                                 {
-                                                                        error({code:2,message:"Position Unavailable"});
+                                                                        error({code:2,message:"Position unavailable"});
                                                                 }
                                                                 else
                                                                 {
@@ -191,7 +193,7 @@ var geo_position_js=function() {
                                 }
 
                         }
-                        else if (typeof(device)!="undefined" && typeof(device.getServiceObject)!="undefined")
+                        else if (typeof(device)!=u && typeof(device.getServiceObject)!=u)
                         {
                                 provider=device.getServiceObject("Service.Location", "ILocation");
 
@@ -219,7 +221,7 @@ var geo_position_js=function() {
 
                 }
                 catch (e){ 
-					if(typeof(console)!="undefined")
+					if(typeof(console)!=u)
 					{
 						console.log(e);
 					}
