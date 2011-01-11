@@ -58,6 +58,18 @@ var geo_position_js=function() {
         var provider=null;
 		var u="undefined";
 
+		pub.showMap = function(latitude,longitude)
+		{
+			if(typeof(blackberry)!=u)
+			{
+				blackberry.launch.newMap({"latitude":latitude*100000,"longitude":-longitude*100000});
+			}
+			else
+			{
+				window.location="http://maps.google.com/maps?q=loc:"+latitude+","+longitude;
+			}
+		}
+
 
         pub.getCurrentPosition = function(success,error,opts)
         {
