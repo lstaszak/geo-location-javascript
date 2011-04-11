@@ -143,9 +143,25 @@ var geo_position_js=function() {
                                 }
                                 provider=blackberry.location;				
                         }
-                        else if(typeof(window.google)!=u && typeof(google.gears)!=u)
+					 	else if(typeof(window.google)!="undefined" && typeof(google.gears)!="undefined")
                         {
                                 provider=google.gears.factory.create('beta.geolocation');
+                                pub.getCurrentPosition = function(successCallback, errorCallback, options)
+                                {
+                                        function _successCallback(p)
+                                        {
+                                                if(typeof(p.latitude)!="undefined")
+                                                {
+                                                        successCallback({timestamp:p.timestamp, coords: {latitude:p.latitude,longitude:p.longitude}});
+                                                }
+                                                else
+                                                {
+                                                        successCallback(p);
+                                                }
+                                        }
+                                        provider.getCurrentPosition(_successCallback,errorCallback,options);
+                                }
+
                         }
                         else if ( typeof(Mojo) !=u && typeof(Mojo.Service.Request)!="Mojo.Service.Request")
                         {
